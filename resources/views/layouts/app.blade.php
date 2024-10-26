@@ -7,17 +7,16 @@
     <title>@yield('title', 'Investimentos')</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body class="d-flex flex-column min-vh-100">
     @include('layouts.header')
 
-    <div class="content-wrapper flex-grow-1">
-        <main class="container my-5">
-            @yield('content')
-        </main>
-    </div>
+    <main class="content-wrapper flex-grow-1">
+        @yield('content')
+    </main>
 
 
     @include('layouts.footer')
