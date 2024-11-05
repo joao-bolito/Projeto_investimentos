@@ -51,7 +51,7 @@
         <h1>Teste</h1>
 
         <div class="row py-2 d-flex justify-content-center">
-            <div class="col-md-4" style="">
+            <div class="col-md-4">
                 <div class="card ranking-card mb-3" style="max-width: 400px;">
                     <div class="card-header bg-transparent">
                         <h4 class="m-0">Maiores Altas</h4>
@@ -84,7 +84,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4" style="">
+            <div class="col-md-4">
                 <div class="card ranking-card mb-3" style="max-width: 400px;">
                     <div class="card-header bg-transparent">
                         <h4 class="m-0">Maiores Altas</h4>
@@ -99,11 +99,10 @@
                         <hr class="mt-0">
                         Footer
                     </div>
-                  </div>
-
+                </div>
             </div>
 
-            <div class="col-md-4" style="">
+            <div class="col-md-4">
                 <div class="card ranking-card mb-3" style="max-width: 400px;">
                     <div class="card-header bg-transparent">
                         <h4 class="m-0">Maiores Altas</h4>
@@ -130,10 +129,85 @@
                         <hr class="mt-0">
                         Footer
                     </div>
-                  </div>
-
+                </div>
             </div>
         </div>
+    </section>
 
+    <section class="py-5 px-4" style="background: darkblue; color: #4bf49a">
+        <ul class="nav nav-tabs" id="investmentTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="intro-tab" data-bs-toggle="tab" href="#intro" role="tab" aria-controls="intro" aria-selected="true">Introdução ao Mercado de Ações</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="types-tab" data-bs-toggle="tab" href="#types" role="tab" aria-controls="types" aria-selected="false">Tipos de Investimentos Disponíveis</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="diversification-tab" data-bs-toggle="tab" href="#diversification" role="tab" aria-controls="diversification" aria-selected="false">Diversificação</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="planning-tab" data-bs-toggle="tab" href="#planning" role="tab" aria-controls="planning" aria-selected="false">Planejamento Financeiro</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="longterm-tab" data-bs-toggle="tab" href="#longterm" role="tab" aria-controls="longterm" aria-selected="false">Longo Prazo vs. Curto Prazo</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="investmentTabContent">
+            <div class="tab-pane fade show active p-4" id="intro" role="tabpanel" aria-labelledby="intro-tab">
+                <h4>Introdução ao Mercado de Ações</h4>
+                <p>
+                    Investir no mercado de ações é uma forma de colocar o seu dinheiro para trabalhar em empresas de diversos setores. Ao investir, você se torna sócio de grandes empresas e tem a chance de participar do crescimento delas ao longo do tempo. No longo prazo, o mercado de ações tem mostrado resultados positivos para quem diversifica e investe de forma consciente.
+                </p>
+            </div>
+            <div class="tab-pane fade p-4" id="types" role="tabpanel" aria-labelledby="types-tab">
+                <h4>Tipos de Investimentos Disponíveis</h4>
+                <p>
+                    O mercado oferece uma grande variedade de investimentos, desde ações, títulos públicos e fundos de investimento até produtos de renda fixa e variável. Cada tipo de investimento tem suas características, retornos esperados e riscos associados. Entender as diferenças é essencial para fazer escolhas alinhadas ao seu perfil de investidor.
+                </p>
+            </div>
+            <div class="tab-pane fade p-4" id="diversification" role="tabpanel" aria-labelledby="diversification-tab">
+                <h4>Diversificação</h4>
+                <p>
+                    A diversificação é a prática de distribuir seus investimentos em diferentes tipos de ativos, setores e mercados para reduzir o impacto de uma possível queda em um único ativo. Ao diversificar, você aumenta as chances de retorno e diminui o risco geral da sua carteira.
+                </p>
+            </div>
+            <div class="tab-pane fade p-4" id="planning" role="tabpanel" aria-labelledby="planning-tab">
+                <h4>Planejamento Financeiro</h4>
+                <p>
+                    Um bom planejamento financeiro começa com objetivos claros. Quer seja para a aposentadoria, para a compra de um imóvel ou para garantir um futuro tranquilo, definir metas e prazos ajuda você a escolher as melhores estratégias de investimento. Invista com um propósito e aproveite as recompensas no futuro.
+                </p>
+            </div>
+            <div class="tab-pane fade p-4" id="longterm" role="tabpanel" aria-labelledby="longterm-tab">
+                <h4>Longo Prazo vs. Curto Prazo</h4>
+                <p>
+                    Investir no curto prazo pode ser uma estratégia interessante, mas os melhores resultados geralmente vêm com o tempo. O longo prazo permite que você aproveite o efeito dos juros compostos, aumentando os seus rendimentos e minimizando o impacto de flutuações momentâneas do mercado.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card ranking-card mb-3">
+                        <div class="card-header bg-transparent">
+                            <h4 class="m-0">Maiores Altas</h4>
+                            <hr class="mb-0">
+                        </div>
+                        <div class="card-body py-1">
+                            @foreach ($maiores_variacoes_negativas as $value)
+                                <p>{{ $value['nome'] }}</p>
+                            @endforeach
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <hr class="mt-0">
+                            Footer
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 @endsection
