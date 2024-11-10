@@ -48,6 +48,7 @@ class DashboardController extends Controller
         //         "nome"                 => $stock['shortName'],
         //         "variacao_porcentagem" => $stock['regularMarketChangePercent'],
         //         "preco"                => $stock['regularMarketPrice'],
+        //         "volume"                => $stock['regularMarketVolume'],
         //         "logo"                 => $stock['logourl'],
         //     ];
         // }
@@ -58,34 +59,35 @@ class DashboardController extends Controller
               "nome" => "PDG REALT   ON      NM",
               "variacao_porcentagem" => 0,
               "preco" => 0.01,
+              "volume" => 109300000,
               "logo" => "https://s3-symbol-logo.tradingview.com/pdg-realt--big.svg"
             ]),
             collect([
               "tickers" => "HAPV3",
               "nome" => "HAPVIDA     ON      NM",
               "variacao_porcentagem" => -3.7039999999999997,
-              "preco" => 3.64,
+              "volume" => 109300000,
               "logo" => "https://s3-symbol-logo.tradingview.com/hapvida--big.svg"
             ]),
             collect([
               "tickers" => "USIM5",
               "nome" => "USIMINAS    PNA     N1",
               "variacao_porcentagem" => 4.239,
-              "preco" => 6.64,
+              "volume" => 109300000,
               "logo" => "https://s3-symbol-logo.tradingview.com/usiminas-pna-n1--big.svg"
             ]),
             collect([
               "tickers" => "VALE3",
               "nome" => "VALE        ON      NM",
               "variacao_porcentagem" => 3.4000000000000004,
-              "preco" => 61.73,
+              "volume" => 109300000,
               "logo" => "https://s3-symbol-logo.tradingview.com/vale--big.svg"
             ]),
             collect([
               "tickers" => "PETR4",
               "nome" => "PETROBRAS   PN      N2",
               "variacao_porcentagem" => 0.696,
-              "preco" => 36.15,
+              "volume" => 109300000,
               "logo" => "https://s3-symbol-logo.tradingview.com/brasileiro-petrobras--big.svg"
             ])
         ];
@@ -95,7 +97,7 @@ class DashboardController extends Controller
               "tickers" => "ENMT4F",
               "nome" => "ENERGISA MT PN",
               "variacao_porcentagem" => 14.987,
-              "preco" => 97.67,
+              "volume" => 109300000,
               "logo" => "https://s3-symbol-logo.tradingview.com/energisa-mt-on--big.svg"
             ]),
             collect([
@@ -103,6 +105,7 @@ class DashboardController extends Controller
               "nome" => "COMGAS      ON",
               "variacao_porcentagem" => 5.833,
               "preco" => 127,
+              "volume" => 109300000,
               "logo" => "https://s3-symbol-logo.tradingview.com/comgas-on--big.svg"
             ]),
             collect([
@@ -110,6 +113,7 @@ class DashboardController extends Controller
               "nome" => "PANATLANTICAPN",
               "variacao_porcentagem" => 12.903,
               "preco" => 35,
+              "volume" => 109300000,
               "logo" => "https://s3-symbol-logo.tradingview.com/panatlanticapn--big.svg"
             ]),
             collect([
@@ -117,6 +121,7 @@ class DashboardController extends Controller
               "nome" => "COMGAS      PNA",
               "variacao_porcentagem" => 2.344,
               "preco" => 131,
+              "volume" => 109300000,
               "logo" => "https://s3-symbol-logo.tradingview.com/comgas-on--big.svg"
             ]),
             collect([
@@ -124,6 +129,7 @@ class DashboardController extends Controller
               "nome" => "PAR AL BAHIAON",
               "variacao_porcentagem" => 5,
               "preco" => 42,
+              "volume" => 109300000,
               "logo" => "https://brapi.dev/favicon.svg"
             ])
         ];
@@ -167,5 +173,17 @@ class DashboardController extends Controller
         ];
 
         return view('dashboard', compact('maiores_variacoes_positivas', 'maiores_variacoes_negativas', 'maiores_volume_negociacao'));
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $token = 'd2yPHBfNrFaEVkxP4iTLtB';
+
+        // Faz a requisição para a API externa
+        $response = Http::get("https://brapi.dev/api/quote/list?search={$query}&token=$token");
+
+        // Retorna os dados da API como JSON
+        return response()->json($response->json());
     }
 }

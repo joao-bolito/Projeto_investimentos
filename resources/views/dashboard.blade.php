@@ -2,6 +2,7 @@
 
 @section('title', 'Página Inicial')
 
+@section('style')
 <style>
     .banner-top {
         align-content: center;
@@ -53,7 +54,7 @@
     }
 
     #dicas a {
-        color: #F5F5F5;
+        color: #fbfbfc;
     }
 
     #dicas a.active {
@@ -66,7 +67,7 @@
 
     .acao:hover {
         background: #424242;
-        color: #F5F5F5;
+        color: #fbfbfc;
         cursor: pointer;
     }
 
@@ -79,18 +80,73 @@
     #btn-ranking:hover {
         border: 1px solid #d2d2d2;
         background: #424242;
-        color: #F5F5F5;
+        color: #fbfbfc;
         border-radius: 10px;
         box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
     }
+
+    #busca {
+        z-index: 1000;
+        color: #fbfbfc
+    }
+
+    #search-results {
+        margin-left: 100px !important;
+        width: 700px;
+    }
+
+    .botao {
+        color: #fbfbfc;
+        padding: 2.5px 0px;
+        width: 50px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .stock {
+        background: #229799;
+    }
+
+    .fund {
+        background: #666;
+    }
+
+    .bdr {
+        background: #9b3d70;
+    }
 </style>
+@endsection
 
 @section('content')
     <section class="banner-top">
-        <img src="{{ asset('image/banner-02.webp') }}" class="banner-top-img" style="background: #2A2F38;">
+        <img src="{{ asset('image/banner-02.webp') }}" class="banner-top-img" style="background: #2A2F38;z-index: 0;">
+
+        <div id="busca" class="container ">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-9">
+                    <h2 class="text-center py-2">Pesquise pelo ativo desejado para ter acesso a cotação, fundamentos e gráficos</h2>
+                </div>
+
+                <div class="col-md-9">
+                    <input
+                        type="text"
+                        id="search-input"
+                        placeholder="Pesquise pelo ativo desejado"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        class="form-control form-control-lg"
+                    >
+
+                    <ul id="search-results" class="dropdown-menu">
+                        <li class="dropdown-item">Nenhum resultado encontrado</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="container py-3" style="color: #424242">
+    <section id="rankings" class="container py-3" style="color: #424242">
         <h2 class="py-2"><i class="fa-solid fa-chart-line"></i> Rankings de Ações</h2>
 
         <div class="row py-2 d-flex justify-content-center">
@@ -127,7 +183,7 @@
                         <a href="">
                             <div id="btn-ranking" class="d-flex justify-content-center p-2 my-2">
                                 <div class="d-flex justify-content-between align-items-center col-md-10">
-                                    <span>Ver mais</span>
+                                    <span>VER MAIS</span>
                                     <span><i class="fa-solid fa-chevron-right"></i></span>
                                 </div>
                             </div>
@@ -173,7 +229,7 @@
                         <a href="">
                             <div id="btn-ranking" class="d-flex justify-content-center p-2 my-2">
                                 <div class="d-flex justify-content-between align-items-center col-md-10">
-                                    <span>Ver mais</span>
+                                    <span>VER MAIS</span>
                                     <span><i class="fa-solid fa-chevron-right"></i></span>
                                 </div>
                             </div>
@@ -190,7 +246,8 @@
                     </div>
                     <div class="card-body py-1">
                         @foreach ($maiores_volume_negociacao as $value)
-                            <div class="d-flex justify-content-between align-center py-2">
+                            <div class="d-flex acao justify-content-between align-center py-2 px-1"
+                                style="border-radius: 5px;">
                                 <div class="d-flex align-items-center">
                                     <img src="{{ $value['logo'] }}" style="width: 40px; height: 40px;">
                                     <div class="mx-2">
@@ -198,9 +255,9 @@
                                         <small>{{ $value['nome'] }}</small>
                                     </div>
                                 </div>
+
                                 <div class="d-flex align-items-center">
-                                    <i class="fa-solid fa-caret-up" style="color: #4bf49a;"></i>
-                                    <span>{{ $value['variacao_porcentagem'] }}</span>
+                                    <span>{{ $value['volume'] }}</span>
                                 </div>
                             </div>
                         @endforeach
@@ -210,7 +267,7 @@
                         <a href="">
                             <div id="btn-ranking" class="d-flex justify-content-center p-2 my-2">
                                 <div class="d-flex justify-content-between align-items-center col-md-10">
-                                    <span>Ver mais</span>
+                                    <span>VER MAIS</span>
                                     <span><i class="fa-solid fa-chevron-right"></i></span>
                                 </div>
                             </div>
@@ -221,7 +278,7 @@
         </div>
     </section>
 
-    <section id="dicas" class="py-4" style="background: #424242; color: #F5F5F5">
+    <section id="dicas" class="py-4" style="background: #424242; color: #fbfbfc">
         <div class="container">
             <h2 class="pb-2"><i class="fa-regular fa-lightbulb"></i> Dicas</h2>
             <ul class="nav nav-tabs" id="investmentTab" role="tablist">
@@ -296,27 +353,110 @@
         </div>
     </section>
 
-    <section>
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card ranking-card mb-3">
-                        <div class="card-header bg-transparent">
-                            <h4 class="m-0">Maiores Altas</h4>
-                            <hr class="mb-0">
+    <section id="fiis" class="container py-5">
+        <h2 class="py-2"><i class="fa-solid fa-city"></i> FIIs Mais Buscados</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card ranking-card mb-3">
+                    <div class="card-header bg-transparent">
+                        <div class="d-flex justify-content-between align-center">
+                            <small style="color: gray">Fiis</small>
+                            <small style="color: gray">Variação</small>
                         </div>
-                        <div class="card-body py-1">
-                            @foreach ($maiores_variacoes_negativas as $value)
-                                <p>{{ $value['nome'] }}</p>
-                            @endforeach
-                        </div>
-                        <div class="card-footer bg-transparent">
-                            <hr class="mt-0">
-                            Footer
-                        </div>
+                        <hr class="my-2">
+                    </div>
+                    <div class="card-body py-1">
+                        @foreach ($maiores_volume_negociacao as $value)
+                            <div class="d-flex justify-content-between align-center py-2">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ $value['logo'] }}" style="width: 40px; height: 40px;">
+                                    <div class="mx-2">
+                                        <h5 class="m-0 fw-bold">{{ $value['tickers'] }}</h5>
+                                        <small>{{ $value['nome'] }}</small>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        @if ($value['variacao_porcentagem'] < 0)
+                                            <i class="fa-solid fa-caret-down" style="color: #f44b4b;"></i>
+                                            &nbsp;
+                                            <span>{{ number_format($value['variacao_porcentagem'], 2) * -1 }}%</span>
+                                        @else
+                                            <i class="fa-solid fa-caret-up" style="color: #4bf49a;"></i>
+                                            &nbsp;
+                                            {{ number_format($value['variacao_porcentagem'], 2) }}%
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <hr class="my-2">
+                        <a href="">
+                            <div id="btn-ranking" class="d-flex justify-content-center p-2 my-2">
+                                <div class="d-flex justify-content-center align-items-center col-md-10">
+                                    <span class="mx-2">VER MAIS</span>
+                                    <span><i class="fa-solid fa-chevron-right"></i></span>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+@endsection
+
+
+@section('script')
+<script>
+    $(document).ready(function () {
+        $('#search-input').on('keyup', function () {
+            let query = $(this).val();
+
+            if (query.length > 2) {
+                $.ajax({
+                    url: "{{ route('search.stocks') }}",
+                    type: 'GET',
+                    data: { query: query },
+                    success: function (data) {
+                        let results = $('#search-results');
+                        results.empty();
+
+                        if (data.stocks && data.stocks.length > 0) {
+                            data.stocks.forEach(stock => {
+                                if (stock.type == 'stock') {
+                                    type = 'ação'
+                                } else if (stock.type == 'fund') {
+                                    type = 'FII'
+                                } else {
+                                    type = 'BDR'
+                                }
+
+                                results.append(`
+                                    <li>
+                                        <a class="dropdown-item d-flex justify-content-between align-items-center" href="#">
+                                            <span>
+                                                ${stock.name}
+                                            </span>
+                                            <span class="botao ${stock.type}">
+                                                ${type}
+                                            </span>
+                                        </a>
+                                    </li>
+                                `);
+
+                            });
+                        } else {
+                            results.append('<li class="dropdown-item">Nenhum resultado encontrado</li>');
+                        }
+                    }
+                });
+            } else {
+                $('#search-results').empty();
+            }
+        });
+    });
+</script>
 @endsection
