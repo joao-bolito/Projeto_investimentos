@@ -160,7 +160,9 @@
                     <div class="card-body py-1">
                         @foreach ($maiores_variacoes_positivas as $value)
                             <div class="d-flex acao justify-content-between align-center py-2 px-1"
-                                style="border-radius: 5px;">
+                                onclick="window.location.href = '{{ route('acoes.index', ['acao' => $value['tickers']]) }}'"
+                                style="border-radius: 5px;"
+                            >
                                 <div class="d-flex align-items-center">
                                     <img src="{{ $value['logo'] }}" style="width: 40px; height: 40px;">
                                     <div class="mx-2">
@@ -180,7 +182,7 @@
 
                     <div class="card-footer bg-transparent">
                         <hr class="my-2">
-                        <a href="">
+                        <a href="{{ route('acoes.ranking') }}">
                             <div id="btn-ranking" class="d-flex justify-content-center p-2 my-2">
                                 <div class="d-flex justify-content-between align-items-center col-md-10">
                                     <span>VER MAIS</span>
@@ -201,7 +203,9 @@
                     <div class="card-body py-1">
                         @foreach ($maiores_variacoes_negativas as $value)
                             <div class="d-flex acao justify-content-between align-center py-2 px-1"
-                                style="border-radius: 5px;">
+                                onclick="window.location.href = '{{ route('acoes.index', ['acao' => $value['tickers']]) }}'"
+                                style="border-radius: 5px;"
+                            >
                                 <div class="d-flex align-items-center">
                                     <img src="{{ $value['logo'] }}" style="width: 40px; height: 40px;">
                                     <div class="mx-2">
@@ -226,7 +230,7 @@
                     </div>
                     <div class="card-footer bg-transparent">
                         <hr class="my-2">
-                        <a href="">
+                        <a href="{{ route('acoes.ranking') }}">
                             <div id="btn-ranking" class="d-flex justify-content-center p-2 my-2">
                                 <div class="d-flex justify-content-between align-items-center col-md-10">
                                     <span>VER MAIS</span>
@@ -247,7 +251,9 @@
                     <div class="card-body py-1">
                         @foreach ($maiores_volume_negociacao as $value)
                             <div class="d-flex acao justify-content-between align-center py-2 px-1"
-                                style="border-radius: 5px;">
+                                onclick="window.location.href = '{{ route('acoes.index', ['acao' => $value['tickers']]) }}'"
+                                style="border-radius: 5px;"
+                            >
                                 <div class="d-flex align-items-center">
                                     <img src="{{ $value['logo'] }}" style="width: 40px; height: 40px;">
                                     <div class="mx-2">
@@ -264,7 +270,7 @@
                     </div>
                     <div class="card-footer bg-transparent">
                         <hr class="my-2">
-                        <a href="">
+                        <a href="{{ route('acoes.ranking') }}">
                             <div id="btn-ranking" class="d-flex justify-content-center p-2 my-2">
                                 <div class="d-flex justify-content-between align-items-center col-md-10">
                                     <span>VER MAIS</span>
@@ -393,7 +399,7 @@
                     </div>
                     <div class="card-footer bg-transparent">
                         <hr class="my-2">
-                        <a href="">
+                        <a href="{{ route('acoes.ranking') }}">
                             <div id="btn-ranking" class="d-flex justify-content-center p-2 my-2">
                                 <div class="d-flex justify-content-center align-items-center col-md-10">
                                     <span class="mx-2">VER MAIS</span>
@@ -446,7 +452,6 @@
                                         </a>
                                     </li>
                                 `);
-
                             });
                         } else {
                             results.append('<li class="dropdown-item">Nenhum resultado encontrado</li>');

@@ -180,10 +180,8 @@ class DashboardController extends Controller
         $query = $request->input('query');
         $token = 'd2yPHBfNrFaEVkxP4iTLtB';
 
-        // Faz a requisição para a API externa
         $response = Http::get("https://brapi.dev/api/quote/list?search={$query}&token=$token");
 
-        // Retorna os dados da API como JSON
         return response()->json($response->json());
     }
 }
