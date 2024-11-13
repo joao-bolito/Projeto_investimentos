@@ -7,7 +7,7 @@
                     <li class="nav-item px-2"><a class="nav-link" href="#rankings">Rankings</a></li>
                     <li class="nav-item px-2"><a class="nav-link" href="#dicas">Dicas</a></li>
                     <li class="nav-item px-2"><a class="nav-link" href="#fiis">FIIs</a></li>
-                    <li class="nav-item px-2"><a class="nav-link" href="#fiis"><i class="fa-solid fa-wallet"></i> Carteira</a></li>
+                    <li class="nav-item px-2"><a class="nav-link" href="{{ route('carteira.index') }}"><i class="fa-solid fa-wallet"></i> Carteira</a></li>
                 </ul>
             </div>
         </div>
