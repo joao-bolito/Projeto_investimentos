@@ -442,7 +442,10 @@
 
                                 results.append(`
                                     <li>
-                                        <a class="dropdown-item d-flex justify-content-between align-items-center" href="#">
+                                        <a
+                                            class="dropdown-item d-flex justify-content-between align-items-center"
+                                            href="{{ route('acoes.index', ['acao' => $value['tickers']]) }}"
+                                        >
                                             <span>
                                                 ${stock.name}
                                             </span>
