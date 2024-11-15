@@ -21,7 +21,7 @@
         }
     </style>
 </head>
-<body class="d-flex flex-column min-vh-100" style="background: #fbfbfc;">
+<body class="d-flex flex-column min-vh-100" style="background: #eaeaea;">
     @include('layouts.header')
 
     <main class="content-wrapper flex-grow-1">

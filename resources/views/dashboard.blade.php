@@ -43,6 +43,7 @@
 
     .ranking-card {
         border-radius: 10px !important;
+        background: #fbfbfc;
     }
 
     .ranking-card .card-header {
@@ -136,6 +137,7 @@
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                         class="form-control form-control-lg"
+                        style="background: #fbfbfc"
                     >
 
                     <ul id="search-results" class="dropdown-menu">
@@ -146,35 +148,35 @@
         </div>
     </section>
 
-    <section id="rankings" class="container py-3" style="color: #424242">
+    <section id="rankings" class="container py-3" style="color: #424242;">
         <h2 class="py-2"><i class="fa-solid fa-chart-line"></i> Rankings de Ações</h2>
 
         <div class="row py-2 d-flex justify-content-center">
             <div class="col-md-4">
                 <div class="card ranking-card mb-3" style="max-width: 400px;">
                     <div class="card-header bg-transparent">
-                        <h4 class="m-0">Maiores Altas</h4>
+                        <h5 class="m-0 p-2 fw-bold">Maiores Altas</h5>
                         <hr class="my-2">
                     </div>
 
                     <div class="card-body py-1">
                         @foreach ($maiores_variacoes_positivas as $value)
                             <div class="d-flex acao justify-content-between align-center py-2 px-1"
-                                onclick="window.location.href = '{{ route('acoes.index', ['acao' => $value['tickers']]) }}'"
+                                onclick="window.location.href = '{{ route('acoes.index', ['acao' => $value['stock']]) }}'"
                                 style="border-radius: 5px;"
                             >
                                 <div class="d-flex align-items-center">
                                     <img src="{{ $value['logo'] }}" style="width: 40px; height: 40px;">
                                     <div class="mx-2">
-                                        <h5 class="m-0">{{ $value['tickers'] }}</h5>
-                                        <small>{{ $value['nome'] }}</small>
+                                        <h5 class="m-0 fw-bold">{{ $value['stock'] }}</h5>
+                                        <small>{{ $value['name'] }}</small>
                                     </div>
                                 </div>
 
                                 <div class="d-flex align-items-center">
                                     <i class="fa-solid fa-caret-up" style="color: #4bf49a;"></i>
                                     &nbsp;
-                                    <span>{{ number_format($value['variacao_porcentagem'], 2) }}%</span>
+                                    <span>{{ number_format($value['change'], 2) }}%</span>
                                 </div>
                             </div>
                         @endforeach
@@ -197,20 +199,20 @@
             <div class="col-md-4">
                 <div class="card ranking-card mb-3" style="max-width: 400px;">
                     <div class="card-header bg-transparent">
-                        <h4 class="m-0">Maiores Baixas</h4>
+                        <h5 class="m-0 p-2 fw-bold">Maiores Baixas</h5>
                         <hr class="my-2">
                     </div>
                     <div class="card-body py-1">
                         @foreach ($maiores_variacoes_negativas as $value)
                             <div class="d-flex acao justify-content-between align-center py-2 px-1"
-                                onclick="window.location.href = '{{ route('acoes.index', ['acao' => $value['tickers']]) }}'"
+                                onclick="window.location.href = '{{ route('acoes.index', ['acao' => $value['stock']]) }}'"
                                 style="border-radius: 5px;"
                             >
                                 <div class="d-flex align-items-center">
                                     <img src="{{ $value['logo'] }}" style="width: 40px; height: 40px;">
                                     <div class="mx-2">
-                                        <h5 class="m-0">{{ $value['tickers'] }}</h5>
-                                        <small>{{ $value['nome'] }}</small>
+                                        <h5 class="m-0 fw-bold">{{ $value['stock'] }}</h5>
+                                        <small>{{ $value['name'] }}</small>
                                     </div>
                                 </div>
 
@@ -218,10 +220,10 @@
                                     <i class="fa-solid fa-caret-down" style="color: #f44b4b;"></i>
                                     &nbsp;
                                     <span>
-                                        @if ($value['variacao_porcentagem'] < 0)
-                                            {{ number_format($value['variacao_porcentagem'], 2) * -1 }}%
+                                        @if ($value['change'] < 0)
+                                            {{ number_format($value['change'], 2) * -1 }}%
                                         @else
-                                            {{ number_format($value['variacao_porcentagem'], 2) }}%
+                                            {{ number_format($value['change'], 2) }}%
                                         @endif
                                     </span>
                                 </div>
@@ -245,20 +247,20 @@
             <div class="col-md-4">
                 <div class="card ranking-card mb-3" style="max-width: 400px;">
                     <div class="card-header bg-transparent">
-                        <h4 class="m-0">Maiores Volumes de Negociações</h4>
+                        <h5 class="m-0 p-2 fw-bold">Maiores Volumes de Negociações</h5>
                         <hr class="my-2">
                     </div>
                     <div class="card-body py-1">
                         @foreach ($maiores_volume_negociacao as $value)
                             <div class="d-flex acao justify-content-between align-center py-2 px-1"
-                                onclick="window.location.href = '{{ route('acoes.index', ['acao' => $value['tickers']]) }}'"
+                                onclick="window.location.href = '{{ route('acoes.index', ['acao' => $value['stock']]) }}'"
                                 style="border-radius: 5px;"
                             >
                                 <div class="d-flex align-items-center">
                                     <img src="{{ $value['logo'] }}" style="width: 40px; height: 40px;">
                                     <div class="mx-2">
-                                        <h5 class="m-0">{{ $value['tickers'] }}</h5>
-                                        <small>{{ $value['nome'] }}</small>
+                                        <h5 class="m-0 fw-bold">{{ $value['stock'] }}</h5>
+                                        <small>{{ $value['name'] }}</small>
                                     </div>
                                 </div>
 
@@ -372,25 +374,25 @@
                         <hr class="my-2">
                     </div>
                     <div class="card-body py-1">
-                        @foreach ($maiores_volume_negociacao as $value)
+                        @foreach ($fiis as $value)
                             <div class="d-flex justify-content-between align-center py-2">
                                 <div class="d-flex align-items-center">
                                     <img src="{{ $value['logo'] }}" style="width: 40px; height: 40px;">
                                     <div class="mx-2">
-                                        <h5 class="m-0 fw-bold">{{ $value['tickers'] }}</h5>
-                                        <small>{{ $value['nome'] }}</small>
+                                        <h5 class="m-0 fw-bold">{{ $value['stock'] }}</h5>
+                                        <small>{{ $value['name'] }}</small>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <div class="d-flex align-items-center">
-                                        @if ($value['variacao_porcentagem'] < 0)
+                                        @if ($value['change'] < 0)
                                             <i class="fa-solid fa-caret-down" style="color: #f44b4b;"></i>
                                             &nbsp;
-                                            <span>{{ number_format($value['variacao_porcentagem'], 2) * -1 }}%</span>
+                                            <span>{{ number_format($value['change'], 2) * -1 }}%</span>
                                         @else
                                             <i class="fa-solid fa-caret-up" style="color: #4bf49a;"></i>
                                             &nbsp;
-                                            {{ number_format($value['variacao_porcentagem'], 2) }}%
+                                            {{ number_format($value['change'], 2) }}%
                                         @endif
                                     </div>
                                 </div>
@@ -430,8 +432,8 @@
                         let results = $('#search-results');
                         results.empty();
 
-                        if (data.stocks && data.stocks.length > 0) {
-                            data.stocks.forEach(stock => {
+                        if (data && data.length > 0) {
+                            data.forEach(stock => {
                                 if (stock.type == 'stock') {
                                     type = 'ação'
                                 } else if (stock.type == 'fund') {
@@ -444,13 +446,11 @@
                                     <li>
                                         <a
                                             class="dropdown-item d-flex justify-content-between align-items-center"
-                                            href="{{ route('acoes.index', ['acao' => $value['tickers']]) }}"
+                                            href="/acoes/acao/${stock.stock}"
                                         >
-                                            <span>
-                                                ${stock.name}
-                                            </span>
+                                            <span>${stock.stock}</span>
                                             <span class="botao ${stock.type}">
-                                                ${type}
+                                                ${stock.type}
                                             </span>
                                         </a>
                                     </li>
