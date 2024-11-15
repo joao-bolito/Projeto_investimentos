@@ -8,10 +8,50 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Ativo;
+use Carbon\Carbon;
 
 class CarteiraController extends Controller
 {
     public function index(Request $request) {
+
+        Auth::attempt([
+            'email' => 'fernandozocarato@hotmail.com',
+            'password' => '12345',
+        ]);
+
+        $total_por_mes = Ativo::select(
+            DB::raw('DATE_FORMAT(data_de_compra, "%Y-%m") as mes'),
+            DB::raw('SUM(quantidade * preco) as total_investido')
+        )
+        ->where('user_id', Auth::id())
+        ->where('data_de_compra', '>=', Carbon::now()->subMonths(6)->startOfMonth())
+        ->groupBy(DB::raw('DATE_FORMAT(data_de_compra, "%Y-%m")'))
+        ->orderBy(DB::raw('DATE_FORMAT(data_de_compra, "%Y-%m")'), 'asc')
+        ->get();
+
+        $total_acumulado = 0;
+        $dados_acumulados = $total_por_mes->map(function ($item) use (&$total_acumulado) {
+            $total_acumulado += $item->total_investido;
+            $item->total_acumulado = $total_acumulado;
+            return $item;
+        });
+
+        $total_por_mes = $dados_acumulados;
+
+        $total_carteira = Ativo::select(
+            'tipo_de_ativo',
+            DB::raw('SUM(quantidade * preco) as total_investido'),
+            DB::raw('(SUM(quantidade * preco) / (SELECT SUM(quantidade * preco) FROM ativos WHERE user_id = ' . Auth::id() . ')) * 100 as porcentagem')
+        )
+        ->where('user_id', Auth::id())
+        ->groupBy('tipo_de_ativo')
+        ->get();
+
+        $total_investido = Ativo::select(
+            DB::raw('SUM(quantidade * preco) as total_investido'),
+        )
+        ->where('user_id', Auth::id())
+        ->get()[0]->total_investido;
 
         $acoes = Ativo::select(
             'tipo_de_ativo',
@@ -21,6 +61,7 @@ class CarteiraController extends Controller
             DB::raw('SUM(quantidade * preco) as total')
         )
         ->where('tipo_de_ativo', 'acoes')
+        ->where('user_id', Auth::id())
         ->groupBy('tipo_de_ativo', 'ativo')
         ->get();
 
@@ -32,6 +73,7 @@ class CarteiraController extends Controller
             DB::raw('SUM(quantidade * preco) as total')
         )
         ->where('tipo_de_ativo', 'bdrs')
+        ->where('user_id', Auth::id())
         ->groupBy('tipo_de_ativo', 'ativo')
         ->get();
 
@@ -43,10 +85,21 @@ class CarteiraController extends Controller
             DB::raw('SUM(quantidade * preco) as total')
         )
         ->where('tipo_de_ativo', 'fiis')
+        ->where('user_id', Auth::id())
         ->groupBy('tipo_de_ativo', 'ativo')
         ->get();
 
-        return view('carteira', compact('acoes', 'fiis', 'bdrs'));
+        return view(
+            'carteira',
+            compact(
+                'acoes',
+                'fiis',
+                'bdrs',
+                'total_por_mes',
+                'total_carteira',
+                'total_investido'
+            )
+        );
     }
 
     public function adicionar_ativo(Request $request) {

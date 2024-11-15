@@ -168,7 +168,7 @@
         </div>
     </section>
 
-    <section id="incadores" style="background: #eaeaea;">
+    <section id="empresa" style="background: #eaeaea;">
         <div class="container py-3 px-5">
             <div class="card mb-3">
                 <div class="card-header d-flex justify-content-between align-items-center py-3" style="background: #424242;color: #fbfbfc">
