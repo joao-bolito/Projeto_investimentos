@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StockController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\dashboardController;
@@ -29,3 +30,4 @@ Route::get('/acoes/ranking', [AcoesController::class, 'ranking'])->name('acoes.r
 
 Route::get('/carteira', [CarteiraController::class, 'index'])->name('carteira.index');
 Route::post('/carteira', [CarteiraController::class, 'adicionar_ativo'])->name('carteira.adicionar_ativo');
+Route::get('/stocks', [StockController::class, 'index']);
