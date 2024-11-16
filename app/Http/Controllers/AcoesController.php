@@ -15,7 +15,7 @@ class AcoesController extends Controller
 
         $response = Http::get("https://brapi.dev/api/quote/{$nome}?modules=summaryProfile&token={$token}")['results'][0];
 
-        if (!isset($response['summaryProfile'])) {
+        if (!isset($response['summaryProfile']) && !isset($response['summaryProfile']['longBusinessSummary'])) {
             return redirect()->back();
         }
 

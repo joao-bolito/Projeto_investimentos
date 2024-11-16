@@ -66,13 +66,13 @@
 @section('content')
 <div style="background: #eaeaea;">
     @if (session('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success m-3 mb-0">
             {{ session('success') }}
         </div>
     @endif
 
     @if ($errors->any())
-        <div class="alert alert-danger">
+        <div class="alert alert-danger m-3 mb-0">
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>

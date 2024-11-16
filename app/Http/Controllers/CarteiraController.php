@@ -12,12 +12,11 @@ use Carbon\Carbon;
 
 class CarteiraController extends Controller
 {
-    public function index(Request $request) {
+    public function __construct() {
+        $this->middleware('check.auth');
+    }
 
-        Auth::attempt([
-            'email' => 'fernandozocarato@hotmail.com',
-            'password' => '12345',
-        ]);
+    public function index(Request $request) {
 
         $total_por_mes = Ativo::select(
             DB::raw('DATE_FORMAT(data_de_compra, "%Y-%m") as mes'),
