@@ -15,3 +15,16 @@ Route::post('/entrar', [loginController::class, 'validaEntrar'])->name('validaEn
 
 
 Route::get('/listar', [listarAcoesController::class, 'listar']);
+use App\Http\Controllers\AcoesController;
+use App\Http\Controllers\CarteiraController;
+
+Route::get('/', [dashboardController::class, 'index'])->name('home');
+Route::get('/buscar', [dashboardController::class, 'search'])->name('search.stocks');
+
+Route::get('/acoes/acao/{acao}', [AcoesController::class, 'index'])->name('acoes.index');
+Route::get('/acoes/acao/{acao}/grafico', [AcoesController::class, 'grafico'])->name('acoes.grafico');
+
+Route::get('/acoes/ranking', [AcoesController::class, 'ranking'])->name('acoes.ranking');
+
+Route::get('/carteira', [CarteiraController::class, 'index'])->name('carteira.index');
+Route::post('/carteira', [CarteiraController::class, 'adicionar_ativo'])->name('carteira.adicionar_ativo');
