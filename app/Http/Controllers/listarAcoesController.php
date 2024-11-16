@@ -14,15 +14,15 @@ class listarAcoesController extends Controller
 
         if($tipo_acao == 'maiores_variacoes_negativas'){
 
-            $lista_acoes = Http::get(env('API_BASE_URL'). "quote/list?type=stock&sortBy=change_abs&sortOrder=asc&limit=5&token=$token")['stocks'];
+            $lista_acoes = Http::get(env('API_BASE_URL'). "quote/list?type=stock&sortBy=change_abs&sortOrder=asc&limit=40&token=$token")['stocks'];
 
         }elseif($tipo_acao == 'maiores_variacoes_positivas'){
 
-            $lista_acoes = Http::get(env('API_BASE_URL'). "quote/list?type=stock&sortBy=change_abs&sortOrder=desc&limit=5&token=$token")['stocks'];
+            $lista_acoes = Http::get(env('API_BASE_URL'). "quote/list?type=stock&sortBy=change_abs&sortOrder=desc&limit=40&token=$token")['stocks'];
 
         }elseif ($tipo_acao == 'maiores_volume_negociacao') {
 
-            $lista_acoes = Http::get(env('API_BASE_URL'). "quote/list?type=stock&sortBy=volume&sortOrder=desc&limit=5&token=$token")['stocks'];
+            $lista_acoes = Http::get(env('API_BASE_URL'). "quote/list?type=stock&sortBy=volume&sortOrder=desc&limit=40&token=$token")['stocks'];
         }
 
         // $translator = new GoogleTranslate('pt-BR');

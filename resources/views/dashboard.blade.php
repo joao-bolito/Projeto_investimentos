@@ -184,7 +184,7 @@
 
                     <div class="card-footer bg-transparent">
                         <hr class="my-2">
-                        <a href="{{ route('acoes.ranking') }}">
+                        <a href="/listar/acoes/ranking/maiores_variacoes_positivas">
                             <div id="btn-ranking" class="d-flex justify-content-center p-2 my-2">
                                 <div class="d-flex justify-content-between align-items-center col-md-10">
                                     <span>VER MAIS</span>
@@ -232,7 +232,7 @@
                     </div>
                     <div class="card-footer bg-transparent">
                         <hr class="my-2">
-                        <a href="{{ route('acoes.ranking') }}">
+                        <a href="/listar/acoes/ranking/maiores_variacoes_negativas">
                             <div id="btn-ranking" class="d-flex justify-content-center p-2 my-2">
                                 <div class="d-flex justify-content-between align-items-center col-md-10">
                                     <span>VER MAIS</span>
@@ -272,7 +272,7 @@
                     </div>
                     <div class="card-footer bg-transparent">
                         <hr class="my-2">
-                        <a href="{{ route('acoes.ranking') }}">
+                        <a href="/listar/acoes/ranking/maiores_volume_negociacao">
                             <div id="btn-ranking" class="d-flex justify-content-center p-2 my-2">
                                 <div class="d-flex justify-content-between align-items-center col-md-10">
                                     <span>VER MAIS</span>
@@ -375,8 +375,12 @@
                     </div>
                     <div class="card-body py-1">
                         @foreach ($fiis as $value)
-                            <div class="d-flex justify-content-between align-center py-2">
-                                <div class="d-flex align-items-center">
+                            <div
+                                class="d-flex acao justify-content-between align-center py-2 px-1"
+                                onclick="window.location.href = '{{ route('acoes.index', ['acao' => $value['stock']]) }}'"
+                                style="border-radius: 5px;"
+                            >
+                                <div class="d-flex  align-items-center">
                                     <img src="{{ $value['logo'] }}" style="width: 40px; height: 40px;">
                                     <div class="mx-2">
                                         <h5 class="m-0 fw-bold">{{ $value['stock'] }}</h5>
@@ -401,7 +405,7 @@
                     </div>
                     <div class="card-footer bg-transparent">
                         <hr class="my-2">
-                        <a href="{{ route('acoes.ranking') }}">
+                        <a href="">
                             <div id="btn-ranking" class="d-flex justify-content-center p-2 my-2">
                                 <div class="d-flex justify-content-center align-items-center col-md-10">
                                     <span class="mx-2">VER MAIS</span>
