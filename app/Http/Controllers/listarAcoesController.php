@@ -3,50 +3,38 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
 class listarAcoesController extends Controller
 {
-    public function listar(){
-        $maiores_variacoes_positivas = [
-            collect([
-              "tickers" => "ENMT4F",
-              "nome" => "ENERGISA MT PN",
-              "variacao_porcentagem" => 14.987,
-              "preco" => 97.67,
-              "logo" => "https://s3-symbol-logo.tradingview.com/energisa-mt-on--big.svg"
-            ]),
-            collect([
-              "tickers" => "CGAS3",
-              "nome" => "COMGAS      ON",
-              "variacao_porcentagem" => 5.833,
-              "preco" => 127,
-              "logo" => "https://s3-symbol-logo.tradingview.com/comgas-on--big.svg"
-            ]),
-            collect([
-              "tickers" => "PATI4",
-              "nome" => "PANATLANTICAPN",
-              "variacao_porcentagem" => 12.903,
-              "preco" => 35,
-              "logo" => "https://s3-symbol-logo.tradingview.com/panatlanticapn--big.svg"
-            ]),
-            collect([
-              "tickers" => "CGAS5",
-              "nome" => "COMGAS      PNA",
-              "variacao_porcentagem" => 2.344,
-              "preco" => 131,
-              "logo" => "https://s3-symbol-logo.tradingview.com/comgas-on--big.svg"
-            ]),
-            collect([
-              "tickers" => "PEAB3F",
-              "nome" => "PAR AL BAHIAON",
-              "variacao_porcentagem" => 5,
-              "preco" => 42,
-              "logo" => "https://brapi.dev/favicon.svg"
-            ])
-        ];
+    public function listar(Request $r, $tipo_acao){
 
-        //return($maiores_variacoes_positivas);
+        $token = 'd2yPHBfNrFaEVkxP4iTLtB';
 
-        return view('listarAcoes.listar', compact('maiores_variacoes_positivas'));
+        if($tipo_acao == 'maiores_variacoes_negativas'){
+
+            $lista_acoes = Http::get(env('API_BASE_URL'). "quote/list?type=stock&sortBy=change_abs&sortOrder=asc&limit=5&token=$token")['stocks'];
+
+        }elseif($tipo_acao == 'maiores_variacoes_positivas'){
+
+            $lista_acoes = Http::get(env('API_BASE_URL'). "quote/list?type=stock&sortBy=change_abs&sortOrder=desc&limit=5&token=$token")['stocks'];
+
+        }elseif ($tipo_acao == 'maiores_volume_negociacao') {
+
+            $lista_acoes = Http::get(env('API_BASE_URL'). "quote/list?type=stock&sortBy=volume&sortOrder=desc&limit=5&token=$token")['stocks'];
+        }
+
+        $translator = new GoogleTranslate('pt-BR');
+
+        //return($lista_acoes);
+
+        // foreach ($lista_acoes as $key => $value) {
+        //     $lista_acoes =
+        //     $response['summaryProfile']['sector'] = $translator->translate($response['summaryProfile']['sector']);
+        // }
+
+
+        return view('listarAcoes.listar', compact('lista_acoes'));
     }
 }

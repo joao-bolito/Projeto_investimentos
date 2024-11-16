@@ -5,6 +5,8 @@ use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\listarAcoesController;
+use App\Http\Controllers\AcoesController;
+use App\Http\Controllers\CarteiraController;
 
 Route::get('/', [dashboardController::class, 'index'])->name('home');
 
@@ -14,9 +16,8 @@ Route::get('/entrar', [loginController::class, 'entrar'])->name('entrar');
 Route::post('/entrar', [loginController::class, 'validaEntrar'])->name('validaEntrar');
 
 
-Route::get('/listar', [listarAcoesController::class, 'listar']);
-use App\Http\Controllers\AcoesController;
-use App\Http\Controllers\CarteiraController;
+Route::get('/listar/acoes/ranking/{tipo_acao}', [listarAcoesController::class, 'listar']);
+
 
 Route::get('/', [dashboardController::class, 'index'])->name('home');
 Route::get('/buscar', [dashboardController::class, 'search'])->name('search.stocks');

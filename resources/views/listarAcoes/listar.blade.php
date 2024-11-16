@@ -3,8 +3,8 @@
 @section('title', 'Listar')
 
 @section('content')
-    @foreach ($maiores_variacoes_positivas as $variacoes_positivas)
-        <h1>{{$variacoes_positivas}}</h1>
+    @foreach ($lista_acoes as $lista)
+        <h1>{{$lista['name']}}</h1>
     @endforeach
 
 
